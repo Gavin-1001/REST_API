@@ -1,13 +1,19 @@
 package com.example.udemy_rest_api.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
 @Entity
+//@AllArgsConstructor
+@NoArgsConstructor
 public class Student {
 
     @Id
@@ -20,33 +26,10 @@ public class Student {
     //@JsonProperty("last_name")change the key in the json request
     private String lastName;
 
+    /*
     public Student() {
-
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    } added NoArgsConstructor annotation. So there is no need for a constructor
+     */
 
     public Student(long id, String firstName, String lastName) {
         this.id = id;
