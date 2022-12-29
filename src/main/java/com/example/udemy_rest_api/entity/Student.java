@@ -1,39 +1,48 @@
 package com.example.udemy_rest_api.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 @Data
 @Entity
-//@AllArgsConstructor
-@NoArgsConstructor
+
+
+@Table(name="student_table")
 public class Student {
 
     @Id
-    @JsonIgnore //can be used to hide the id from the json get request. Can be used on any property in the class
+    @Column(name="id")
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    //@JsonProperty("first_name") change the key in the json request
+
+    @Column(name="first_name")
+    @JsonProperty("first_name")
     private String firstName;
 
-    //@JsonProperty("last_name")change the key in the json request
+    @Column(name="last_name")
+    @JsonProperty("last_name")
     private String lastName;
 
-    /*
-    public Student() {
-    } added NoArgsConstructor annotation. So there is no need for a constructor
-     */
+    @Column(name="email")
+    @JsonProperty("_email")
+    private String email;
 
-    public Student(long id, String firstName, String lastName) {
+    public Student() {
+    } //added NoArgsConstructor annotation. So there is no need for a constructor
+
+
+    public Student(long id, String firstName, String lastName, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
     }
+
+
+
+
 }
