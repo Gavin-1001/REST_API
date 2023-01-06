@@ -51,9 +51,17 @@ public class StudentController {
         return new StudentResponse(student);
     }
 
+    /*
     @DeleteMapping("/delete")
     //the @requestParam annotation will take the id from the request {url /delete/?id=1} and assign the var id to the int in the url
     public String deleteStudent(@RequestParam long id){
+        return studentService.deleteStudent(id);
+    }*/
+
+    //You can choose which method to use to delete a record in the db
+    //PathVariable way
+    @DeleteMapping("/delete/{id}")
+    public String deleteStudent(@PathVariable long id){
         return studentService.deleteStudent(id);
     }
 }

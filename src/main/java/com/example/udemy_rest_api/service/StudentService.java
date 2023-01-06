@@ -51,9 +51,17 @@ public class StudentService {
         return student;
     }
 
+    /* path for query reference http://localhost:8080/api/student/delete?id=2
     public String deleteStudent(long id){
         studentRepository.deleteById(id);
         return "Student has been deleted successfully";
-
     }
+    */
+
+    public String deleteStudent(long id){
+        studentRepository.deleteById(id);
+        return "Student has been deleted successfully";
+    }
+
+
 }
