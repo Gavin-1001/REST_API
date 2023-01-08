@@ -64,4 +64,22 @@ public class StudentService {
     }
 
 
+
+    public List<Student> getByFirstName(String firstName){
+        //We are using a List because if there is for example more than one record where the record has the same firstName
+        //this returns a list of student
+
+        //call the repository
+        return studentRepository.findByFirstName(firstName);
+    }
+
+    public List<Student> getByLastName(String lastName){
+        return studentRepository.findByLastName(lastName);
+    }
+
+    public List<Student> getByEmail(String email){
+        return studentRepository.findByEmail(email);
+    }
+
+
 }

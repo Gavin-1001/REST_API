@@ -45,11 +45,14 @@ public class StudentController {
         return new StudentResponse(student);
     }
 
+    //http://localhost:8080/api/student/update
+    //the id needs to be passed in the json payload
     @PutMapping("/update")
     public StudentResponse updateStudent(@Valid @RequestBody UpdateStudentRequest updateStudentRequest){
         Student student = studentService.updateStudent(updateStudentRequest);
         return new StudentResponse(student);
     }
+
 
     /*
     @DeleteMapping("/delete")
@@ -64,6 +67,52 @@ public class StudentController {
     public String deleteStudent(@PathVariable long id){
         return studentService.deleteStudent(id);
     }
+
+    @GetMapping("/getByFirstName/{firstName}")
+    public List<StudentResponse> getByFirstName(@PathVariable String firstName) {
+        //The return type will be a list of studentResponse, so this is the model class we have to retrieve the information for the student. Will return a list of student
+        List<Student> studentList = studentService.getByFirstName(firstName);
+
+        //THIS CODE JUST CONVERTS LIST OF STUDENT TO LIST OF STUDENTRESPONSE. IT IS A SAFETY CLASS THAT IS USED SO YOU DO NOT DIRECTLY EXPOSE YOUR ENTITY CLASS
+        List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
+
+        studentList.stream().forEach(student -> {
+            studentResponseList.add(new StudentResponse(student));
+        });
+
+        return studentResponseList;
+        ///////////////////////////
+    }
+
+    @GetMapping("/getByLastName/{lastName}")
+    public List<StudentResponse> getByLastName(@PathVariable String lastName){
+        List<Student> studentList = studentService.getByLastName(lastName);
+
+        //THIS CODE JUST CONVERTS LIST OF STUDENT TO LIST OF STUDENTRESPONSE. IT IS A SAFETY CLASS THAT IS USED SO YOU DO NOT DIRECTLY EXPOSE YOUR ENTITY CLASS
+        List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
+
+        studentList.stream().forEach(student -> {
+            studentResponseList.add(new StudentResponse(student));
+        });
+
+        return studentResponseList;
+    }
+
+    @GetMapping("/getByEmail/{email}")
+    public List<StudentResponse> getByEmail(@PathVariable String email){
+        List<Student> studentList = studentService.getByEmail(email);
+
+        //THIS CODE JUST CONVERTS LIST OF STUDENT TO LIST OF STUDENTRESPONSE. IT IS A SAFETY CLASS THAT IS USED SO YOU DO NOT DIRECTLY EXPOSE YOUR ENTITY CLASS
+        List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
+
+        studentList.stream().forEach(student -> {
+            studentResponseList.add(new StudentResponse(student));
+        });
+
+        return studentResponseList;
+    }
+
+
 
 }
 
