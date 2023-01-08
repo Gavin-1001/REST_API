@@ -114,6 +114,14 @@ public class StudentController {
 
 
 
+    @GetMapping("/getByFirstNameAndLastName/{firstName}/{lastName}")
+    public StudentResponse getByFirstNameAndLastName(@PathVariable String firstName, @PathVariable String lastName){
+        return new StudentResponse(studentService.getByFirstNameAndLastName(firstName, lastName));
+        //Hibernate: select s1_0._id,s1_0._email,s1_0.first_name,s1_0.last_name from student_table s1_0 where s1_0.first_name=? and s1_0.last_name=?
+        //This is the query statement that Spring queries in the db. Notice the AND, it matches the and in the repository
+    }
+
+
 }
 
 

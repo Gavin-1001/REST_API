@@ -15,5 +15,9 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     List<Student> findByLastName(String lastName);
 
     List<Student> findByEmail(String email);
-    
+
+    //returns just one Student object
+    Student findByFirstNameAndLastName(String firstName, String lastName);
+    //jpa will create a query where it checks for the firstName AND the lastName
+
 }

@@ -81,5 +81,9 @@ public class StudentService {
         return studentRepository.findByEmail(email);
     }
 
+    public Student getByFirstNameAndLastName(String firstName, String lastName){
+        return studentRepository.findByFirstNameAndLastName(firstName, lastName);
+    }
+
 
 }
