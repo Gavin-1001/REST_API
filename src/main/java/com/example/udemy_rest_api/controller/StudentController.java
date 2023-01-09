@@ -122,6 +122,18 @@ public class StudentController {
     }
 
 
+    @GetMapping("/getByFirstNameOrLastName/{firstName}/{lastName}")
+    public List<StudentResponse> getByFirstNameOrLastName(@PathVariable String firstName, @PathVariable String lastName){
+        List<Student> studentList = studentService.getByFirstNameOrLastName(firstName, lastName);
+
+        List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
+
+        studentList.stream().forEach(student -> {
+            studentResponseList.add(new StudentResponse(student));
+        });
+
+        return studentResponseList;
+    }
 }
 
 

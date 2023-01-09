@@ -85,5 +85,11 @@ public class StudentService {
         return studentRepository.findByFirstNameAndLastName(firstName, lastName);
     }
 
+    public List<Student> getByFirstNameOrLastName(String firstName, String lastName){
+
+        //we need a list of student because the query contains an OR which will return more than one record. E.g. if a record has a firstName of John and another record
+        //has a lastName containing Paul. It will return 2 seperate students
+        return studentRepository.findByFirstNameOrLastName(firstName, lastName);
+    }
 
 }

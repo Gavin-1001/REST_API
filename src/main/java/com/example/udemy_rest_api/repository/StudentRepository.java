@@ -20,4 +20,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Student findByFirstNameAndLastName(String firstName, String lastName);
     //jpa will create a query where it checks for the firstName AND the lastName
 
+    List<Student> findByFirstNameOrLastName(String firstName, String lastName);
+
 }
