@@ -3,6 +3,7 @@ package com.example.udemy_rest_api.controller;
 
 import com.example.udemy_rest_api.entity.Student;
 import com.example.udemy_rest_api.request.CreateStudentRequest;
+import com.example.udemy_rest_api.request.InQueryRequest;
 import com.example.udemy_rest_api.request.UpdateStudentRequest;
 import com.example.udemy_rest_api.response.StudentResponse;
 
@@ -125,6 +126,20 @@ public class StudentController {
     @GetMapping("/getByFirstNameOrLastName/{firstName}/{lastName}")
     public List<StudentResponse> getByFirstNameOrLastName(@PathVariable String firstName, @PathVariable String lastName){
         List<Student> studentList = studentService.getByFirstNameOrLastName(firstName, lastName);
+
+        List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
+
+        studentList.stream().forEach(student -> {
+            studentResponseList.add(new StudentResponse(student));
+        });
+
+        return studentResponseList;
+    }
+
+    @GetMapping("/getByFirstNameIn")            //@RequestBody - whatever json that is passed into the request payload, it will be converted into the
+                                                   //object of this model class. When it has been converted, we will get a list of firstNames
+    public List<StudentResponse> getByFirstNameIn(@RequestBody InQueryRequest inQueryRequest){
+        List<Student> studentList = studentService.getByFirstNameIn(inQueryRequest);
 
         List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
 

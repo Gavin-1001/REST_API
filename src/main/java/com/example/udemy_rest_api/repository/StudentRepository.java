@@ -22,4 +22,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     List<Student> findByFirstNameOrLastName(String firstName, String lastName);
 
+    //using List of Student because we will have more than one record returned
+    List<Student> findByFirstNameIn(List<String> firstNames);
+
 }

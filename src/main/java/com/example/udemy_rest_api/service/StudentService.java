@@ -3,6 +3,7 @@ package com.example.udemy_rest_api.service;
 import com.example.udemy_rest_api.entity.Student;
 import com.example.udemy_rest_api.repository.StudentRepository;
 import com.example.udemy_rest_api.request.CreateStudentRequest;
+import com.example.udemy_rest_api.request.InQueryRequest;
 import com.example.udemy_rest_api.request.UpdateStudentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -91,5 +92,11 @@ public class StudentService {
         //has a lastName containing Paul. It will return 2 seperate students
         return studentRepository.findByFirstNameOrLastName(firstName, lastName);
     }
+
+    public List<Student> getByFirstNameIn(InQueryRequest inQueryRequest){
+        return studentRepository.findByFirstNameIn(inQueryRequest.getFirstNames());
+    }
+
+
 
 }
