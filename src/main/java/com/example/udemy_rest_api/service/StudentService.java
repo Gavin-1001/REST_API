@@ -6,6 +6,9 @@ import com.example.udemy_rest_api.request.CreateStudentRequest;
 import com.example.udemy_rest_api.request.InQueryRequest;
 import com.example.udemy_rest_api.request.UpdateStudentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -98,5 +101,15 @@ public class StudentService {
     }
 
 
+    public List<Student> getAllStudentsWithPagination(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo -1, pageSize);
+        //The "-1" - The reason it is -1, because the PageRequest.of is an array and the index starts at 0th index.
+        return studentRepository.findAll(pageable).getContent(); // lecture 44
 
+    }
+
+    public List<Student> getAllStudentsWithSorting() {
+        Sort sort = Sort.by(Sort.Direction.ASC, "firstName");
+        return studentRepository.findAll(sort);
+    }
 }

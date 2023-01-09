@@ -149,6 +149,35 @@ public class StudentController {
 
         return studentResponseList;
     }
+
+    @GetMapping("/getAllWithPagination")
+    // http://localhost:8080/api/student/getAllWithPagination?pageNo=1&pageSize=10
+    public List<StudentResponse> getAllStudentsWithPagination(@RequestParam int pageNo, @RequestParam int pageSize){
+        List<Student> studentList = studentService.getAllStudentsWithPagination(pageNo, pageSize);
+
+        List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
+
+        studentList.stream().forEach(student -> {
+            studentResponseList.add(new StudentResponse(student));
+        });
+
+        return studentResponseList;
+    }
+
+    @GetMapping("/getAllWithSorting")
+    // http://localhost:8080/api/student/getAllWithSorting
+    public List<StudentResponse> getAllStudentsWithSorting(){
+        //Lecture 45
+        List<Student> studentList = studentService.getAllStudentsWithSorting();
+
+        List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
+
+        studentList.stream().forEach(student -> {
+            studentResponseList.add(new StudentResponse(student));
+        });
+
+        return studentResponseList;
+    }
 }
 
 
