@@ -109,7 +109,9 @@ public class StudentService {
     }
 
     public List<Student> getAllStudentsWithSorting() {
-        Sort sort = Sort.by(Sort.Direction.ASC, "firstName");
+        Sort sort = Sort.by(Sort.Direction.ASC, "firstName", "lastName", "email");
+        //The Sort.Direction.ASC can be sorted based on condition. I.E. sorted by firstName, or lastName or email
         return studentRepository.findAll(sort);
     }
 }
+
