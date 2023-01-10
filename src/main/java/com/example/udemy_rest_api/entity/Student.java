@@ -26,11 +26,14 @@ public class Student {
     @Column(name="_email")
     private String email;
 
+    @Transient //is ignored by databse, no need to create a new column to store the data
+    private String fullName;
 
     public Student (CreateStudentRequest createStudentRequest) {
         this.firstName = createStudentRequest.getFirstName();
         this.lastName = createStudentRequest.getLastName();
         this.email = createStudentRequest.getEmail();
+        this.fullName = createStudentRequest.getFirstName() + " " +createStudentRequest.getLastName();
     }
 
 
