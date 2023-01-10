@@ -113,5 +113,9 @@ public class StudentService {
         //The Sort.Direction.ASC can be sorted based on condition. I.E. sorted by firstName, or lastName or email
         return studentRepository.findAll(sort);
     }
+
+    public List<Student> like(String firstName){
+        return studentRepository.findByFirstNameLike(firstName);
+    }
 }
 

@@ -26,7 +26,7 @@ public class Student {
     @Column(name="_email")
     private String email;
 
-    @Transient //is ignored by databse, no need to create a new column to store the data
+    @Transient //is ignored by database, no need to create a new column to store the data
     private String fullName;
 
     public Student (CreateStudentRequest createStudentRequest) {
