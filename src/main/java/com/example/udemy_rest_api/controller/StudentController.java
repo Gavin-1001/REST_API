@@ -193,6 +193,11 @@ public class StudentController {
     }
 
 
+    @PutMapping("/updateFirstName/{id}/{firstName}")
+    public String updateStudentWithJpql(@PathVariable Long id, @PathVariable String firstName){
+        return studentService.updateStudentWithJpql(id, firstName)+ "Student(s) updated";
+    }
+
 
 }
 

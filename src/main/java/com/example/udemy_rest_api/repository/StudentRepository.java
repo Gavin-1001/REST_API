@@ -3,8 +3,10 @@ package com.example.udemy_rest_api.repository;
 import com.example.udemy_rest_api.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,8 +30,17 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     List<Student> findByFirstNameLike(String firstName);
 
-
-    //Using JPQL
-    @Query("from student_table where first_name = "Gavin" and last_name= \"Shelley\"")
+    @Query("From Student where firstName=:firstName and lastName=:lastName")
     Student getByFirstNameOrLastName(String lastName, String firstName);
+    //@Query("From Student where firstName=:firstname and lastName=:lastName")
+    //Student getByFirstNameOrLastName(String lastName,@Param("firstname") String firstName);
+    //if you don't want to query using the name of the variable from the entity, you can use @Param annotation to insert the query to the method in the repo
+
+//whenever you are modifying in the database you need to add the annotations @Modifying and @Transactional
+    @Modifying
+    @Transactional
+    @Query("Update Student set firstName =:firstName where id=:id")
+    Integer updateFirstName(Long id, String firstName);
+
+
 }
