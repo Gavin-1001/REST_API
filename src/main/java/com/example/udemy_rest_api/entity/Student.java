@@ -37,7 +37,7 @@ public class Student {
         this.firstName = createStudentRequest.getFirstName();
         this.lastName = createStudentRequest.getLastName();
         this.email = createStudentRequest.getEmail();
-        this.fullName = createStudentRequest.getFirstName() + " " +createStudentRequest.getLastName();
+        //this.fullName = createStudentRequest.getFirstName() + " " +createStudentRequest.getLastName();
     }
 
 

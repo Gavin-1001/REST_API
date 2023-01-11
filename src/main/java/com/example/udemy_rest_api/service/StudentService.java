@@ -1,6 +1,8 @@
 package com.example.udemy_rest_api.service;
 
+import com.example.udemy_rest_api.entity.Address;
 import com.example.udemy_rest_api.entity.Student;
+import com.example.udemy_rest_api.repository.AddressRepository;
 import com.example.udemy_rest_api.repository.StudentRepository;
 import com.example.udemy_rest_api.request.CreateStudentRequest;
 import com.example.udemy_rest_api.request.InQueryRequest;
@@ -20,6 +22,9 @@ public class StudentService {
     @Autowired
     StudentRepository studentRepository;
 
+    @Autowired
+    AddressRepository addressRepository;
+
 
     public List<Student> getAllStudent(){
         return studentRepository.findAll();
@@ -35,6 +40,13 @@ public class StudentService {
     public Student createStudent (CreateStudentRequest createStudentRequest) {
         Student student = new Student(createStudentRequest);
 
+        Address address = new Address();
+        address.setStreet(createStudentRequest.getStreet());
+        address.setCity(createStudentRequest.getCity());
+
+        address = addressRepository.save(address);
+
+        student.setAddress(address);
         student = studentRepository.save(student);
         return student;
     }

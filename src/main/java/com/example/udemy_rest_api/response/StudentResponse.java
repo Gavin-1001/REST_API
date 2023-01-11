@@ -4,11 +4,12 @@ import com.example.udemy_rest_api.entity.Student;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 
-
-@Data
-
+@Getter
+@Setter
 public class StudentResponse {
 
     //@JsonIgnore
@@ -26,13 +27,22 @@ public class StudentResponse {
     private String fullName;
     //when GETting all student records /getAll it will return student firstName and lastName concatenated
     //when POSTing data the payload sent will contain the fullName variable in the sent data
+
+    private String street;
+
+    private String city;
+
+    //converting entity class Student to model class StudentResponse
     public StudentResponse(Student student){
         //you don't want the id displayed in the json data
         this.id = student.getId();
         this.firstName = student.getFirstName();
         this.lastName = student.getLastName();
         this.email = student.getEmail();
-        this.fullName = student.getFirstName() + " " + student.getLastName();
+        this.street = student.getAddress().getStreet();
+        this.city = student.getAddress().getCity();
+        // this.fullName = student.getFirstName() + " " + student.getLastName();
+
     }
 
 }

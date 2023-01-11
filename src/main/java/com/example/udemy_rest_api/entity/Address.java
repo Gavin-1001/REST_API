@@ -1,9 +1,13 @@
 package com.example.udemy_rest_api.entity;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Table(name="address")
 
 @Entity
@@ -19,4 +23,5 @@ public class Address {
 
     @Column(name="city")
     private String city;
+
 }
