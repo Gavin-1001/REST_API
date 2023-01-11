@@ -2,7 +2,7 @@ package com.example.udemy_rest_api.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.Setter;
 

@@ -202,6 +202,19 @@ public class StudentController {
         return studentService.deleteByFirstName(firstName) + "Student(s) deleted";
     }
 
+    @GetMapping("/getByCity/{city}")
+    public List<StudentResponse> getByCity(@PathVariable String city) {
+        List<Student> studentList = studentService.getByCity(city);
+
+        List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
+
+        studentList.stream().forEach(student -> {
+            studentResponseList.add(new StudentResponse(student));
+        });
+
+        return studentResponseList;
+    }
+
 
 
 

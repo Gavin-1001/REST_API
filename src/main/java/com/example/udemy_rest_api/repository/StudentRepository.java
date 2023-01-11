@@ -1,5 +1,6 @@
 package com.example.udemy_rest_api.repository;
 
+import com.example.udemy_rest_api.entity.Address;
 import com.example.udemy_rest_api.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -47,5 +48,8 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Transactional
     @Query("Delete From Student where firstName=:firstName")
     Integer deleteByFirstName(String firstName);
+
+    @Query("From Student where address.city = :city")
+    List<Student> findByAddressCity(String city);
 
 }
