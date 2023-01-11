@@ -203,6 +203,7 @@ public class StudentController {
     }
 
     @GetMapping("/getByCity/{city}")
+    //http://localhost:8080/api/student/getByCity/Dublin
     public List<StudentResponse> getByCity(@PathVariable String city) {
         List<Student> studentList = studentService.getByCity(city);
 
