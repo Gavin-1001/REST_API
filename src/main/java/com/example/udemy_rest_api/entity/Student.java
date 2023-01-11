@@ -26,6 +26,10 @@ public class Student {
     @Column(name="_email")
     private String email;
 
+    @OneToOne
+    @JoinColumn(name="address_id")
+    private Address address;
+
     @Transient //is ignored by database, no need to create a new column to store the data
     private String fullName;
 
