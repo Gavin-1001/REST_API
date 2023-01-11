@@ -42,5 +42,10 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query("Update Student set firstName =:firstName where id=:id")
     Integer updateFirstName(Long id, String firstName);
 
+    @Modifying
+    @Transactional
+    @Query("Delete From Student where firstName=:firstName")
+    Integer deleteByFirstName(String firstName);
+
 
 }

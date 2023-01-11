@@ -122,5 +122,9 @@ public class StudentService {
     public Integer updateStudentWithJpql(Long id, String firstName) {
         return studentRepository.updateFirstName(id, firstName);
     }
+
+    public Integer deleteByFirstName(String firstName){
+        return studentRepository.deleteByFirstName(firstName);
+    }
 }
 
