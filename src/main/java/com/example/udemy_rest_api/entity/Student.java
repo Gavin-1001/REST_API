@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @NoArgsConstructor
 @Table(name="student_table")
@@ -26,9 +28,12 @@ public class Student {
     @Column(name="_email")
     private String email;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY) //by default spring runs with EAGER loading. But we will initialize LAZY loading
     @JoinColumn(name="address_id")
     private Address address;
+
+    @OneToMany(mappedBy = "student")
+    private List<Subject> learningSubjects; //MANY students can study ONE subject. ONE Student can study MANY subjects
 
     @Transient //is ignored by database, no need to create a new column to store the data
     private String fullName;

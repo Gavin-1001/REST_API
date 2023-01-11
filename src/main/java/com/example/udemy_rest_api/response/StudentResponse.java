@@ -41,7 +41,7 @@ public class StudentResponse {
         this.email = student.getEmail();
         this.street = student.getAddress().getStreet();
         this.city = student.getAddress().getCity();
-        // this.fullName = student.getFirstName() + " " + student.getLastName();
+        //this.fullName = student.getFirstName() + " " + student.getLastName();
 
     }
 
