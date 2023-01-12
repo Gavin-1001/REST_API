@@ -1,11 +1,15 @@
 package com.example.udemy_rest_api.response;
 
 import com.example.udemy_rest_api.entity.Student;
+import com.example.udemy_rest_api.entity.Subject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
@@ -32,6 +36,8 @@ public class StudentResponse {
 
     private String city;
 
+    private List<SubjectResponse> learningSubjects;
+
     //converting entity class Student to model class StudentResponse
     public StudentResponse(Student student){
         //you don't want the id displayed in the json data
@@ -43,6 +49,15 @@ public class StudentResponse {
         this.city = student.getAddress().getCity();
         //this.fullName = student.getFirstName() + " " + student.getLastName();
 
+        //inside of the student entity class we have a list of subjects that we will convert to the SubjectResponse List, basically a list of out SubjectResponse Model class
+        if(student.getLearningSubjects() != null){
+            learningSubjects = new ArrayList<SubjectResponse>();
+            for(Subject subject: student.getLearningSubjects()){
+                learningSubjects.add( //so we are looping through the ArrayList and converting it
+                        new SubjectResponse(subject)
+                );
+            }
+        }
     }
 
 }

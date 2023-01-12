@@ -2,9 +2,12 @@ package com.example.udemy_rest_api.service;
 
 import com.example.udemy_rest_api.entity.Address;
 import com.example.udemy_rest_api.entity.Student;
+import com.example.udemy_rest_api.entity.Subject;
 import com.example.udemy_rest_api.repository.AddressRepository;
 import com.example.udemy_rest_api.repository.StudentRepository;
+import com.example.udemy_rest_api.repository.SubjectRepository;
 import com.example.udemy_rest_api.request.CreateStudentRequest;
+import com.example.udemy_rest_api.request.CreateSubjectRequest;
 import com.example.udemy_rest_api.request.InQueryRequest;
 import com.example.udemy_rest_api.request.UpdateStudentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +28,9 @@ public class StudentService {
 
     @Autowired
     AddressRepository addressRepository;
+
+    @Autowired
+    SubjectRepository subjectRepository;
 
 
     public List<Student> getAllStudent(){
@@ -48,7 +55,27 @@ public class StudentService {
 
         student.setAddress(address);
         student = studentRepository.save(student);
-        return student;
+
+        List<Subject> subjectsList = new ArrayList<Subject>();
+
+
+        if(createStudentRequest.getSubjectsLearning() != null){ //because this is a list we need to loop through the list
+            for(CreateSubjectRequest createSubjectRequest : createStudentRequest.getSubjectsLearning()){
+                Subject subject = new Subject();
+                subject.setSubjectName(createSubjectRequest.getSubjectName());
+                subject.setMarksObtained(createSubjectRequest.getMarksObtained());
+                subject.setStudent(student); //setting up the foreign key in the subjects table
+
+                subjectsList.add(subject);
+            }
+
+            subjectRepository.saveAll(subjectsList);
+
+        }
+
+        student.setLearningSubjects(subjectsList);
+
+        return student; //returns the student object entity class back to the controller
     }
 
     public Student updateStudent(UpdateStudentRequest updateStudentRequest){
