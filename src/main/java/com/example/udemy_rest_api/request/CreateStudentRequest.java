@@ -23,6 +23,6 @@ public class CreateStudentRequest {
     private String city;
 
     private List<CreateSubjectRequest> subjectsLearning;
-    //subjectsLearning is the json key
-
+    //subjectsLearning is the json Key
+    //
 }
