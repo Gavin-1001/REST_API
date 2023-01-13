@@ -1,9 +1,9 @@
 package com.example.udemy_rest_api.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Data

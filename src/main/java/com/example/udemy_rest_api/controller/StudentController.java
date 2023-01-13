@@ -8,10 +8,12 @@ import com.example.udemy_rest_api.request.UpdateStudentRequest;
 import com.example.udemy_rest_api.response.StudentResponse;
 
 import com.example.udemy_rest_api.service.StudentService;
-import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,11 +24,22 @@ import java.util.List;
 @RequestMapping("/api/student")
 public class StudentController {
 
+    // Error < Warn < Info < Debug < Trace
+    Logger logger = LoggerFactory.getLogger(StudentController.class);
+    //Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
     StudentService studentService;
 
     @GetMapping("/getAll")
     public List<StudentResponse> getAllStudents(){
+        logger.error("Inside Error");
+        logger.warn("Inside Warning");
+        logger.info("Inside Info");
+        logger.debug("Inside debug");
+        logger.trace("Inside trace");
+
+
         List<Student> studentList = studentService.getAllStudent();
         List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
 
@@ -141,12 +154,14 @@ public class StudentController {
     public List<StudentResponse> getByFirstNameIn(@RequestBody InQueryRequest inQueryRequest){
         List<Student> studentList = studentService.getByFirstNameIn(inQueryRequest);
 
+        logger.info("inQueryRequest = " + inQueryRequest);
+
         List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
 
         studentList.stream().forEach(student -> {
             studentResponseList.add(new StudentResponse(student));
         });
-
+        logger.info("studentResponseList " + studentResponseList);
         return studentResponseList;
     }
 

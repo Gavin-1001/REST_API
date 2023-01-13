@@ -1,8 +1,11 @@
 package com.example.udemy_rest_api.entity;
 
-import jakarta.persistence.*;
+//import jakarta.persistence.*;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor

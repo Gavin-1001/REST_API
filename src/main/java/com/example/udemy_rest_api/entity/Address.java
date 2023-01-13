@@ -1,10 +1,10 @@
 package com.example.udemy_rest_api.entity;
 
 
-import jakarta.persistence.*;
-
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -24,6 +24,7 @@ public class Address {
     @Column(name="city")
     private String city;
 
+    //@OneToOne(mappedBy = "address")
     @OneToOne(mappedBy = "address")
     private Student student;
     //make the relationship OneToOne bidirectional
